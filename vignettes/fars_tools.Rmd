@@ -1,0 +1,110 @@
+---
+title: "fars_tools"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fars_tools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, 
+  echo = FALSE, message = FALSE, 
+  eval=F, 	#Run the R code?
+  messages=F, #	Print out messages?
+  warnings=F, 	#Print out warnings?
+  include=F, 	#If FALSE, run code, but don’t print code or results
+  warning = FALSE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(farsUSA)
+```
+
+## Practical note
+Package `farsUSA` was the practical exercise of the course *Building R-packages* included in the *+Coursera+* *Mastering Software Development in R*
+## Introduction 
+This package reads *fars* data and is able to summarize and represents accidents data for each year and USA state.
+
+## Functions
+This package has internal functions devoted to read and prepare data from source, and two practical functions for summarizing and ploting data.
+
+### Internal functions
+
+#### fars_read
+*read a csv text file*
+
+This function reads a csv format file and stores in dataframe tbl_df. For this task uses package "readr" which allows to directly read comressed files
+
+@param filename A character chain containing the name of the file you want to read
+
+@return This function returns a dataframe tbl_df
+
+
+```{r examples: fars-read}
+fars_read("accident_2013.csv.bz2")
+```
+
+#### make_filename
+*Creates a file name*
+
+This function creates the apropriate name of the the file corresponding to accident data for the year 'year'
+
+@param year An integer indicating the year for filename creation
+
+@return This function returns a character variable containing a file name
+
+```{r examples: make_filename}
+make_filename(2013)
+```
+
+#### fars_read_years
+*Reads several csv text files*
+
+This function reads several csv format files and stores month and year into a list of dataframes tbl_df,
+containing month and year of the accidents stored, one tbl_df for each csv file.
+
+@param years A list containing the years to estract information
+
+@return This function returns a list of tbl_df from all years in "years" with month and year information
+
+```{r examples: fars_read_years}
+fars_read_years(list(2013,2014))
+```
+
+
+
+### User functions
+
+#### fars_summarize_years
+*Summarizes accidents by year and month*
+
+This function summarizes the number of accidents occurred each month for a list of years
+
+@param years A list of years
+
+@return This function returns a tbl_df containing number of accidents by month
+for the years included in the list parsed as parameter
+
+```{r examples: fars_summarize_years}
+fars_summarize_years(list(2014,2015))
+```
+
+#### fars_map_state
+*Print a map of crash over year and state of U.S.*
+
+This function prints a map with the position of every crash occurred over the state 'state.num' and the year 'year'
+
+@param state.num integer with the number of desired state, ranging 1:56
+@param year An integert with the desired year
+
+@return This function returns a map
+
+
+```{r examples: fars_map_state}
+fars_map_state(1, 2013)
+```
+
