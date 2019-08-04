@@ -1,2 +1,3 @@
 # farsUSA
-[![Build Status](https://travis-ci.org/acristo/farsUSA.svg?branch=master)](https://travis-ci.org/acristo/farsUSA)
+
+https://travis-ci.org/acristo/farsUSA/builds/567568527
