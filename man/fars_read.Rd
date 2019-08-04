@@ -19,6 +19,6 @@ This function reads a csv format file and stores in dataframe tbl_df. For this t
 
 ## fars_read("accident_2013.csv.bz2")
 
-fars_read( system.file("extdata", "accident_2013.csv.bz2", package = "farsUSA") )
+fars_read( system.file("extdata", "accident_2014.csv.bz2", package = "farsUSA") )
 
 }

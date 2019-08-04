@@ -10,8 +10,9 @@
 #'
 #' ## fars_read("accident_2013.csv.bz2")
 #'
-#' fars_read( system.file("extdata", "accident_2013.csv.bz2", package = "farsUSA") )
+#' fars_read( system.file("extdata", "accident_2014.csv.bz2", package = "farsUSA") )
 #'
+#' @export
 fars_read <- function(filename) {
         if(!file.exists(filename))
                 stop("file '", filename, "' does not exist")
@@ -32,9 +33,12 @@ fars_read <- function(filename) {
 #' @examples
 #' make_filename(2013)
 #'
+#' @export
 make_filename <- function(year) {
         year <- as.integer(year)
-        sprintf("accident_%d.csv.bz2", year)
+        system.file("extdata",
+                    sprintf("accident_%d.csv.bz2", year),
+                    package = "farsUSA")
 }
 
 #' Reads several csv text files
@@ -49,6 +53,9 @@ make_filename <- function(year) {
 #' @examples
 #' fars_read_years(list(2013,2014))
 #'
+#' @importFrom magrittr "%>%"
+#'
+#' @export
 fars_read_years <- function(years) {
         lapply(years, function(year) {
                 file <- make_filename(year)
